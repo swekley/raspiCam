@@ -17,6 +17,8 @@ const photoResolutionPresets = [
   { name: '8 MP', width: 3264, height: 2448 },
   { name: '8.6 MP', width: 3840, height: 2160 },
   { name: '12.3 MP', width: 4056, height: 3040 },
+  { name: 'picam3', width: 4608, height: 2592 },
+  { name: 'IMX519', width: 4656, height: 3496 },
 ];
 
 const photoTimeoutPresets = [

@@ -17,12 +17,18 @@ const videoResolutionPresets = [
   { name: '720p', width: 1280, height: 720 },
   { name: '1080p', width: 1920, height: 1080 },
   { name: '1640x1232', width: 1640, height: 1232 },
+  { name: 'picam3', width: 1536, height: 864 },
+  { name: 'imx519', width: 2328, height: 1748 },
+
+
+  1536
 ];
 
 const qualityPresets = [
   { name: 'low', bitrate: 1000000 },
   { name: 'medium', bitrate: 10000000 },
   { name: 'high', bitrate: 15000000 },
+  { name: 'ultra', bitrate: 20000000 },
 ];
 
 const timeoutPresets = [
