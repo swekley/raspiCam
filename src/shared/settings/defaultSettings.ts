@@ -28,6 +28,7 @@ export const defaultSettings: DefaultSettings = {
     framerate: streamSettingDesc.framerate.defaultValue,
     codec: streamSettingDesc.codec.defaultValue,
     bitrate: streamSettingDesc.bitrate.defaultValue,
+    'libav-format': streamSettingDesc['libav-format'].defaultValue,
   },
   photo: {
     width: photoSettingDesc.width.defaultValue,

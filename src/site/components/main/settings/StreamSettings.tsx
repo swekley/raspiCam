@@ -1,8 +1,4 @@
 import React from 'react';
-import {
-  ApplicationSetting,
-  ApplicationSettingDesc,
-} from '../../../../shared/settings/application.js';
 import { StreamSetting, StreamSettingDesc } from '../../../../shared/settings/stream.js';
 import { EnumDropdownSetting } from './common/EnumDropdownSetting.js';
 import { EnumSlider } from './common/EnumSlider.js';
@@ -23,19 +19,11 @@ const streamResolutionPresets = [
 
 export interface StreamSettingsProps {
   stream: StreamSettingDesc;
-  application: ApplicationSettingDesc;
   updateStream: (data: StreamSetting) => void;
-  updateApplication: (app: ApplicationSetting) => void;
 }
 
-export const StreamSettings: React.FC<StreamSettingsProps> = ({
-  stream,
-  application,
-  updateStream,
-  updateApplication,
-}) => {
+export const StreamSettings: React.FC<StreamSettingsProps> = ({ stream, updateStream }) => {
   const updateStreamField = updateTypedField(updateStream);
-  const updateApplicationField = updateTypedField(updateApplication);
 
   return (
     <SettingsWrapper>
@@ -66,17 +54,21 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
       <SettingsExpander
         header={<EnumDropdownSetting {...stream.codec} update={updateStreamField('codec')} />}
       >
-        {stream.codec.value === 'H264' && (
+        {stream.codec.value === 'MJPEG' ? (
+          <NumberSetting {...stream.quality} update={updateStreamField('quality')} />
+        ) : (
           <React.Fragment>
             <NumberSetting {...stream.bitrate} update={updateStreamField('bitrate')} />
-            <EnumDropdownSetting
-              {...application.player}
-              update={updateApplicationField('player')}
-            />
+            <EnumDropdownSetting {...stream.player} update={updateStreamField('player')} />
+            {stream.codec.value === 'LIBAV' && (
+              <EnumDropdownSetting
+                {...stream['libav-format']}
+                update={updateStreamField('libav-format')}
+              />
+            )}
+            <EnumDropdownSetting {...stream.profile} update={updateStreamField('profile')} />
+            <EnumDropdownSetting {...stream.level} update={updateStreamField('level')} />
           </React.Fragment>
-        )}
-        {stream.codec.value === 'MJPEG' && (
-          <NumberSetting {...stream.quality} update={updateStreamField('quality')} />
         )}
       </SettingsExpander>
     </SettingsWrapper>
